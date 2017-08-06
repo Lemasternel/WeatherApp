@@ -1,5 +1,5 @@
 const yeargs = require("yargs");
-const geocode = require('./geocode/geocode');
+const geoloc_weather = require('./geoloc_weather/geoloc_weather');
 
 const argv = yeargs.options({
     a:{
@@ -12,10 +12,19 @@ const argv = yeargs.options({
 
 //console.log(argv);
 
-geocode.address(argv.address, (errorMessage, results) => {
+geoloc_weather.address(argv.address, (errorMessage, results) => {
     if (errorMessage) {
         console.log(errorMessage);
     } else {
         console.log(JSON.stringify(results, undefined, 2));
+
+        geoloc_weather.weather(results, (errorMessage, results) => {
+            if (errorMessage) {
+                console.log(errorMessage);
+            } else {
+                console.log(JSON.stringify(results, undefined, 2));
+            }
+        });
     }
 });
+

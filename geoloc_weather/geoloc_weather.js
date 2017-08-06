@@ -28,4 +28,26 @@ var address = (address, callback) => {
     });
 };
 
+var weather = (address, callback) => {
+    //https://api.darksky.net/forecast/apikey/latitude,longitude
+    //acfe87ce9a7ea8ebf011206029f4b7d6
+
+    request({
+        url:`https://api.darksky.net/forecast/acfe87ce9a7ea8ebf011206029f4b7d6/${address.latitude},${address.longitude}`,
+        json:true
+    }, (error, response, body) => {
+        if (error) {
+            callback('Unable to connect to Forecast.io servers.')
+        } if (response.statusCode !== 200 ) {
+            callback(`Unable to find weather for '${address.address}'.`);
+        } else {
+            callback(undefined, {
+                summary: body.currently.summary,
+                temperature: body.currently.temperature,
+            });
+        }
+    });
+};
+
 module.exports.address = address;
+module.exports.weather = weather;
