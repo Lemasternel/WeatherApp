@@ -16,13 +16,15 @@ geoloc_weather.address(argv.address, (errorMessage, results) => {
     if (errorMessage) {
         console.log(errorMessage);
     } else {
-        console.log(JSON.stringify(results, undefined, 2));
+        //console.log(JSON.stringify(results, undefined, 2));
+        console.log(results.address);
 
         geoloc_weather.weather(results, (errorMessage, results) => {
             if (errorMessage) {
                 console.log(errorMessage);
             } else {
-                console.log(JSON.stringify(results, undefined, 2));
+                //console.log(JSON.stringify(results, undefined, 2));
+                console.log(`Its currently ${results.temperature}F, but feels like ${results.apparentTemperature}F and is ${results.summary}.`);
             }
         });
     }

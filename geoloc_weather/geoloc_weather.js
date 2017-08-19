@@ -1,6 +1,5 @@
 const request = require("request");
 
-
 var address = (address, callback) => {
     const encodedAddress = encodeURIComponent(address);
     //decodeURIComponent(encodedArg);
@@ -44,6 +43,7 @@ var weather = (address, callback) => {
             callback(undefined, {
                 summary: body.currently.summary,
                 temperature: body.currently.temperature,
+                apparentTemperature: body.currently.apparentTemperature
             });
         }
     });
